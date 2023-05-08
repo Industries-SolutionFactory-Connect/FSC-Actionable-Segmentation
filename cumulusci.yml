@@ -1,0 +1,28 @@
+minimum_cumulusci_version: '3.74.0'
+project:
+    name: FSC-Actionable-Segmentation
+    package:
+        name: FSC-Actionable-Segmentation
+        api_version: '55.0'
+    git:
+        default_branch: 'main'
+        prefix_feature: 'feature/'
+        prefix_beta: 'beta/'
+        prefix_release: 'release/'
+    source_format: sfdx
+
+tasks:
+    robot:
+        options:
+            suites: robot/FSC-Actionable-Segmentation/tests
+            options:
+                outputdir: robot/FSC-Actionable-Segmentation/results
+
+    robot_testdoc:
+        options:
+            path: robot/FSC-Actionable-Segmentation/tests
+            output: robot/FSC-Actionable-Segmentation/doc/FSC-Actionable-Segmentation_tests.html
+
+    run_tests:
+        options:
+            required_org_code_coverage_percent: 75
