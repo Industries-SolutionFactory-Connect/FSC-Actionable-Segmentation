@@ -1,0 +1,8 @@
+extract:
+  BatchCalcJobDefinition:
+    fields:
+    - DeveloperName
+    - Language
+    - MasterLabel
+    - ProcessType
+    - IsTemplate
