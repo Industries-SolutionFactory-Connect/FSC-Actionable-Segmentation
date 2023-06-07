@@ -14,3 +14,58 @@ Insert BatchCalcJobDefinition:
   - MasterLabel
   - ProcessType
   - IsTemplate
+Insert InsightsExternalData:
+  sf_object: InsightsExternalData
+  table: InsightsExternalData
+  fields:
+  - LicenseType
+  - CompressedMetadataLength
+  - Format
+  - Dataflow
+  - EdgemartAlias
+  - Description
+  - EdgemartContainer
+  - EdgemartLabel
+  - Operation
+  - IsIndependentParts
+  - FileName
+  - MetadataJson
+  - MetaDataLength
+  - NotificationEmail
+  - NotificationSent
+  - Action
+  - Status
+  - StatusMessage
+  - SubmittedDate
+  - IsDependentOnLastUpload
+  - Target
+Insert FinServ__IndustriesSettings__c:
+  sf_object: FinServ__IndustriesSettings__c
+  table: FinServ__IndustriesSettings__c
+  fields:
+  - FinServ__Enable__c
+  - Name
+Insert Folder:
+  sf_object: Folder
+  table: Folder
+  fields:
+  - AccessType
+  - DeveloperName
+  - IsReadonly
+  - Name
+  - Type
+Insert WaveAutoInstallRequest:
+  sf_object: WaveAutoInstallRequest
+  table: WaveAutoInstallRequest
+  fields:
+  - Configuration
+  - RequestLog
+  - Name
+  - RequestStatus
+  - RequestType
+  - TemplateApiName
+  - TemplateVersion
+  lookups:
+    FolderId:
+      table: Folder
+      key_field: FolderId
