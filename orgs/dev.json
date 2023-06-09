@@ -1,6 +1,7 @@
 {
   "orgName": "FSC-Actionable-Segmentation - Dev Org",
   "template": "0TTB0000001LmmR",
+  "features": ["EnableSetPasswordInApi"],
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true

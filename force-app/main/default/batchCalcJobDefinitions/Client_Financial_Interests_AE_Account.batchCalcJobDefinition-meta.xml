@@ -539,10 +539,12 @@
             <sourceFieldName>BillingCity</sourceFieldName>
             <targetFieldName>BillingCity</targetFieldName>
         </fields>
+        <folderName>ActionableSegmentation</folderName>
         <isChangedRow>false</isChangedRow>
         <label>Client Financial Interests</label>
         <name>Client_Financial_Interests</name>
         <sourceName>Account_Assets_Financials_Interests</sourceName>
+        <storageType>Analytics</storageType>
         <targetObjectName>AccountAssestsFinancialInterests</targetObjectName>
     </writebacks>
 </BatchCalcJobDefinition>
