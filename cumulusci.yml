@@ -61,3 +61,7 @@ flows:
         steps:
             3:
                 task: install_crma_app
+            4:
+                task: util_sleep
+                options:
+                    seconds: 30
