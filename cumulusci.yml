@@ -26,3 +26,38 @@ tasks:
     run_tests:
         options:
             required_org_code_coverage_percent: 75
+
+    install_crma_app:
+        description: Anonymous apex code execution before installation
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            apex: |
+                try {
+                    Map<String, Object> configuration = new Map<String, Object>();
+                    Map<String, Object> appConfiguration = new Map<String,Object>();
+                    appConfiguration.put('deleteAppOnConstructionFailure', true);
+                    configuration.put('appConfiguration', appConfiguration);
+                    WaveAutoInstallRequest newRequest = new WaveAutoInstallRequest();
+                    newRequest.put('Name', 'Test WaveAppCreate request');
+                    newRequest.put('TemplateApiName', 'sfdc_internal__ActionableSegmentation');
+                    newRequest.put('RequestStatus', 'Enqueued');
+                    newRequest.put('RequestType', 'WaveAppCreate');
+                    newRequest.put('Configuration', JSON.serialize(configuration));
+                    System.debug('Installig CRMA app...');
+                    insert newRequest;
+                    System.debug('Insert request id is ' + newRequest.Id);
+                    WaveAutoInstallRequest[] inprogressRequests = [SELECT Id,Name,RequestStatus,RequestType FROM WaveAutoInstallRequest WHERE RequestStatus = 'InProgress' AND RequestType = 'WaveAppCreate' ];
+                    System.debug('Poll request size is ' + inprogressRequests.size());
+                    while(inprogressRequests.size() > 0) {
+                        inprogressRequests = [SELECT Id,Name,RequestStatus,RequestType FROM WaveAutoInstallRequest WHERE RequestStatus = 'InProgress' AND RequestType = 'WaveAppCreate'];
+                        System.debug('Poll request size is ' + inprogressRequests.size());
+                    }
+                } catch(Exception e) {
+                    System.debug('There is an exception while installing CRMA app' + e);
+                }
+
+flows:
+    dependencies:
+        steps:
+            3:
+                task: install_crma_app
