@@ -3,7 +3,7 @@ project:
     name: FSC-Actionable-Segmentation
     package:
         name: FSC-Actionable-Segmentation
-        api_version: '57.0'
+        api_version: '58.0'
     git:
         default_branch: 'main'
         prefix_feature: 'feature/'
@@ -56,6 +56,10 @@ tasks:
                     System.debug('There is an exception while installing CRMA app' + e);
                 }
 
+    create_interest_tags:
+        description: Creates interest tags using connect API
+        class_path: cumulusci_ext.tasks.industries.create_interest_tags.CreateInterestTags
+
 flows:
     dependencies:
         steps:
@@ -64,4 +68,22 @@ flows:
             4:
                 task: util_sleep
                 options:
-                    seconds: 30
+                    seconds: 60
+
+    config_dev:
+        steps:
+            3:
+                task: generate_and_load_from_yaml
+                options:
+                    generator_yaml: recipe_tag_category.yml
+            4:
+                task: create_interest_tags
+                options:
+                    tags_per_category: 3
+            5:
+                task: generate_and_load_from_yaml
+                options:
+                    generator_yaml: recipe_account.yml
+                    num_records: 100
+                    num_records_tablename: Account
+                    batch_size: 1
