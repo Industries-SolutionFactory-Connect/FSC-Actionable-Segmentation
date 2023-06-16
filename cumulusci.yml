@@ -56,6 +56,10 @@ tasks:
                     System.debug('There is an exception while installing CRMA app' + e);
                 }
 
+    create_interest_tags:
+        description: Creates interest tags using connect API
+        class_path: cumulusci_ext.tasks.industries.create_interest_tags.CreateInterestTags
+
 flows:
     dependencies:
         steps:
@@ -71,4 +75,15 @@ flows:
             3:
                 task: generate_and_load_from_yaml
                 options:
-                    generator_yaml: recipe.yml
+                    generator_yaml: recipe_tag_category.yml
+            4:
+                task: create_interest_tags
+                options:
+                    tags_per_category: 3
+            5:
+                task: generate_and_load_from_yaml
+                options:
+                    generator_yaml: recipe_account.yml
+                    num_records: 100
+                    num_records_tablename: Account
+                    batch_size: 1

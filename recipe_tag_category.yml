@@ -1,0 +1,12 @@
+- snowfakery_version: 3
+- object: TagCategory
+  count: 3
+  fields:
+    Name: Category ${{id}}
+    Icon:
+      random_choice:
+        standard:avatar: 1%
+        custom:custom11: 1%
+        standard:avatar_loading: 1%
+        standard:bot: 1%
+        standard:case: 1%

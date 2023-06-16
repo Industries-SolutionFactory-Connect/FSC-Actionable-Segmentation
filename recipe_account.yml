@@ -1,6 +1,7 @@
 - snowfakery_version: 3
+- plugin: snowfakery.standard_plugins.Salesforce.SOQLDataset
 - object: Account
-  count: 2000
+  count: 1
   fields:
     RecordType: PersonAccount
     FirstName: 
@@ -21,7 +22,7 @@
             LoanAccount: 33%
         FinServ__PrimaryOwner__c:
           reference: Account
-        Name: ${{Account.FirstName}} FinancialAccount
+        Name: ${{Account.FirstName}} ${{RecordType}}
         FinServ__Balance__c:
           random_number:
             min: 10000
@@ -60,3 +61,17 @@
           random_number:
             min: 10000
             max: 50000
+    - object: TopicAssignment
+      count:
+        random_number:
+          min: 2
+          max: 8
+      fields:
+        __topics_from_salesforce:
+          SOQLDataset.shuffle:
+            fields: Id
+            from: Topic
+        EntityId: 
+          reference: Account
+        TopicId: ${{__topics_from_salesforce.Id}}
+
