@@ -1,6 +1,7 @@
 {
   "orgName": "FSC-Actionable-Segmentation - Dev Org",
   "template": "0TTB0000001LmmR",
+  "features": ["EnableSetPasswordInApi", "FLOWTRANSFORM"],
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
@@ -19,6 +20,13 @@
     },
     "languageSettings": {
       "enableTranslationWorkbench": true
+    },
+    "AnalyticsSettings": {
+      "sonicEnabled": true,
+      "autoInstallApps": true
+    },
+    "IndustriesSettings": {
+      "enableActionableList": true
     }
   }
 }

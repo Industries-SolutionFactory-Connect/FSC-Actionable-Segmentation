@@ -1,0 +1,77 @@
+- snowfakery_version: 3
+- plugin: snowfakery.standard_plugins.Salesforce.SOQLDataset
+- object: Account
+  count: 1
+  fields:
+    RecordType: PersonAccount
+    FirstName: 
+      fake: FirstName
+    LastName: 
+      fake: LastName
+  friends:
+    - object: FinServ__FinancialAccount__c
+      count:
+        random_number:
+          min: 1
+          max: 6
+      fields:
+        RecordType:
+          random_choice:
+            BankingAccount: 33%
+            CreditCard: 33%
+            LoanAccount: 33%
+        FinServ__PrimaryOwner__c:
+          reference: Account
+        Name: ${{Account.FirstName}} ${{RecordType}}
+        FinServ__Balance__c:
+          random_number:
+            min: 10000
+            max: 50000
+        FinServ__CashBalance__c:
+          random_number:
+            min: 10000
+            max: 50000
+        FinServ__LoanAmount__c:
+          random_number:
+            min: 10000
+            max: 50000
+        FinServ__TotalCreditLimit__c:
+          random_number:
+            min: 10000
+            max: 50000
+        FinServ__AvailableCredit__c:
+          random_number:
+            min: 10000
+            max: ${{FinServ__TotalCreditLimit__c}}
+    - object: FinServ__AssetsAndLiabilities__c
+      count:
+        random_number:
+          min: 1
+          max: 4
+      fields:
+        RecordType:
+          random_choice:
+            Asset: 50%
+            Liability: 50%
+        FinServ__PrimaryOwner__c:
+          reference: Account
+        Name:
+          fake: Name
+        FinServ__Amount__c:
+          random_number:
+            min: 10000
+            max: 50000
+    - object: TopicAssignment
+      count:
+        random_number:
+          min: 2
+          max: 8
+      fields:
+        __topics_from_salesforce:
+          SOQLDataset.shuffle:
+            fields: Id
+            from: Topic
+        EntityId: 
+          reference: Account
+        TopicId: ${{__topics_from_salesforce.Id}}
+
