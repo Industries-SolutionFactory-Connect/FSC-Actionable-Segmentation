@@ -45,13 +45,6 @@ tasks:
                     newRequest.put('Configuration', JSON.serialize(configuration));
                     System.debug('Installig CRMA app...');
                     insert newRequest;
-                    System.debug('Insert request id is ' + newRequest.Id);
-                    WaveAutoInstallRequest[] inprogressRequests = [SELECT Id,Name,RequestStatus,RequestType FROM WaveAutoInstallRequest WHERE RequestStatus = 'InProgress' AND RequestType = 'WaveAppCreate' ];
-                    System.debug('Poll request size is ' + inprogressRequests.size());
-                    while(inprogressRequests.size() > 0) {
-                        inprogressRequests = [SELECT Id,Name,RequestStatus,RequestType FROM WaveAutoInstallRequest WHERE RequestStatus = 'InProgress' AND RequestType = 'WaveAppCreate'];
-                        System.debug('Poll request size is ' + inprogressRequests.size());
-                    }
                 } catch(Exception e) {
                     System.debug('There is an exception while installing CRMA app' + e);
                 }
