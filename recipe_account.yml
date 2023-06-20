@@ -16,7 +16,7 @@
       fake: Country
     BillingPostalCode:
       fake: Zipcode
-    Phone: ${{fake.PhoneNumber}}
+    Phone: ${{fake.basic_phone_number}}
     AnnualRevenue:
       random_number:
         min: 100000
