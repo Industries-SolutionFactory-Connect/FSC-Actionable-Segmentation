@@ -1,13 +1,44 @@
 - snowfakery_version: 3
 - plugin: snowfakery.standard_plugins.Salesforce.SOQLDataset
+- var: snowfakery_locale
+  value: en_US
 - object: Account
   count: 1
   fields:
-    RecordType: PersonAccount
+    RecordType: FSCPersonAccount
     FirstName: 
       fake: FirstName
     LastName: 
       fake: LastName
+    BillingCity:
+      fake: City
+    BillingCountry:
+      fake: Country
+    BillingPostalCode:
+      fake: Zipcode
+    Phone: ${{fake.PhoneNumber}}
+    AnnualRevenue:
+      random_number:
+        min: 100000
+        max: 999999
+    FinServ__RiskTolerance__c:
+      random_choice:
+        Aggressive: 25%
+        Conservative: 25%
+        Moderate: 25%
+        None: 25%
+    Industry:
+      random_choice:
+        Agriculture: 10%
+        Biotechnology: 10%
+        Banking: 10%
+        Other: 10%
+        Government: 10%
+        Insurance: 10%
+        Education: 10%
+        Retail: 10%
+        Communications: 10%
+        Transportation: 10%
   friends:
     - object: FinServ__FinancialAccount__c
       count:
@@ -22,6 +53,10 @@
             LoanAccount: 33%
         FinServ__PrimaryOwner__c:
           reference: Account
+        FinServ__OpenDate__c:
+          fake.date_between:
+            start_date: -180d
+            end_date: -1d
         Name: ${{Account.FirstName}} ${{RecordType}}
         FinServ__Balance__c:
           random_number:
@@ -55,8 +90,7 @@
             Liability: 50%
         FinServ__PrimaryOwner__c:
           reference: Account
-        Name:
-          fake: Name
+        Name: ${{Account.FirstName}} ${{RecordType}}
         FinServ__Amount__c:
           random_number:
             min: 10000
