@@ -48,6 +48,8 @@ tasks:
                 } catch(Exception e) {
                     System.debug('There is an exception while installing CRMA app' + e);
                 }
+        ui_options:
+            name: Install CRMA application to enable Actionable Segmentation
 
     create_interest_tags:
         description: Creates interest tags using connect API
@@ -58,10 +60,14 @@ flows:
         steps:
             3:
                 task: install_crma_app
+                ui_options:
+                    name: Install CRMA application to enable Actionable Segmentation
             4:
                 task: util_sleep
                 options:
                     seconds: 60
+                ui_options:
+                    name: Wait until CRMA application is installed
 
     config_dev:
         steps:
