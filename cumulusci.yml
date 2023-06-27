@@ -85,14 +85,20 @@ flows:
         steps:
             1:
                 task: install_crma_app
+                ui_options:
+                    name: Install CRMA application to enable Actionable Segmentation
             2:
                 task: util_sleep
                 options:
                     seconds: 60
+                ui_options:
+                    name: Wait until CRMA application is installed
             3:
                 task: deploy
                 options:
                     path: force-app/main/default/
+                ui_options:
+                    name: Deploy metadata
 
     fsc_actionable_segmentation_load_data:
         steps:
@@ -100,10 +106,14 @@ flows:
                 task: generate_and_load_from_yaml
                 options:
                     generator_yaml: recipe_tag_category.yml
+                ui_options:
+                    name: Create tag categories
             2:
                 task: create_interest_tags
                 options:
                     tags_per_category: 3
+                ui_options:
+                    name: Create Interest Tags
             3:
                 task: generate_and_load_from_yaml
                 options:
@@ -111,6 +121,8 @@ flows:
                     num_records: 100
                     num_records_tablename: Account
                     batch_size: 1
+                ui_options:
+                    name: Load Account, Financial Account, and Assets and Liabilities
 
     fsc_actionable_segmentation:
         steps:
