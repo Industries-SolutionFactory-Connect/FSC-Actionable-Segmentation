@@ -126,7 +126,7 @@ plans:
         tier: primary
         is_listed: True
         preflight_message: "This will install FSC Actionable Segmentation feature"
-        post_install_message: "Thanks for installing FSC Actionable Segmentation Module. "
+        post_install_message: "Thank you for installing FSC Actionable Segmentation Module. "
         error_message: "To get help with this error, go to [help.salesforce.com](https://help.salesforce.com/), find the Support & Services area and log a technical support ticket with Salesforce. Include “PMM” in the subject line and include in your comment the installation link shown here."
         checks:
             - when: "'SonicEmbeddedStorePsl' not in tasks.get_available_permission_set_licenses()"
@@ -148,7 +148,7 @@ plans:
         tier: additional
         is_listed: True
         preflight_message: "This will load data for FSC Actionable Segmentation feature"
-        post_install_message: "Thanks for installing FSC Actionable Segmentation Module. "
+        post_install_message: "Thank you for installing FSC Actionable Segmentation Module and loading data. "
         error_message: "To get help with this error, go to [help.salesforce.com](https://help.salesforce.com/), find the Support & Services area and log a technical support ticket with Salesforce. Include “PMM” in the subject line and include in your comment the installation link shown here."
         checks:
             - when: "'SonicEmbeddedStorePsl' not in tasks.get_available_permission_set_licenses()"
