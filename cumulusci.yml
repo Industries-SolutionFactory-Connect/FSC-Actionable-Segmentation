@@ -80,3 +80,86 @@ flows:
                     num_records: 100
                     num_records_tablename: Account
                     batch_size: 1
+
+    fsc_actionable_segmentation_install:
+        steps:
+            1:
+                task: install_crma_app
+            2:
+                task: util_sleep
+                options:
+                    seconds: 60
+            3:
+                task: deploy
+                options:
+                    path: force-app/main/default/
+
+    fsc_actionable_segmentation_load_data:
+        steps:
+            1:
+                task: generate_and_load_from_yaml
+                options:
+                    generator_yaml: recipe_tag_category.yml
+            2:
+                task: create_interest_tags
+                options:
+                    tags_per_category: 3
+            3:
+                task: generate_and_load_from_yaml
+                options:
+                    generator_yaml: recipe_account.yml
+                    num_records: 100
+                    num_records_tablename: Account
+                    batch_size: 1
+
+    fsc_actionable_segmentation:
+        steps:
+            1:
+                flow: fsc_actionable_segmentation_install
+            2:
+                flow: fsc_actionable_segmentation_load_data
+
+plans:
+    install:
+        slug: install
+        title: FSC Actionable Segmentation
+        tier: primary
+        is_listed: True
+        preflight_message: "This will install FSC Actionable Segmentation feature"
+        post_install_message: "Thank you for installing FSC Actionable Segmentation Module. "
+        error_message: "To get help with this error, go to [help.salesforce.com](https://help.salesforce.com/), find the Support & Services area and log a technical support ticket with Salesforce. Include “PMM” in the subject line and include in your comment the installation link shown here."
+        checks:
+            - when: "'SonicEmbeddedStorePsl' not in tasks.get_available_permission_set_licenses()"
+              action: error
+              message: "You need SonicEmbeddedStorePsl licence to use this feature. Contact your Administrator."
+            - when: "'DataPipelinesAddOnPsl' not in tasks.get_available_permission_set_licenses()"
+              action: error
+              message: "You need DataPipelinesAddOnPsl licence to use this feature. Contact your Administrator."
+            - when: "'IndustriesServiceExcellencePsl' not in tasks.get_available_permission_set_licenses()"
+              action: error
+              message: "You need IndustriesServiceExcellencePsl licence to use this feature. Contact your Administrator."
+        steps:
+            1:
+                flow: fsc_actionable_segmentation_install
+
+    install_data:
+        slug: install_data
+        title: Sample Data Plan
+        tier: additional
+        is_listed: True
+        preflight_message: "This will load data for FSC Actionable Segmentation feature"
+        post_install_message: "Thank you for installing FSC Actionable Segmentation Module and loading data. "
+        error_message: "To get help with this error, go to [help.salesforce.com](https://help.salesforce.com/), find the Support & Services area and log a technical support ticket with Salesforce. Include “PMM” in the subject line and include in your comment the installation link shown here."
+        checks:
+            - when: "'SonicEmbeddedStorePsl' not in tasks.get_available_permission_set_licenses()"
+              action: error
+              message: "You need SonicEmbeddedStorePsl licence to use this feature. Contact your Administrator."
+            - when: "'DataPipelinesAddOnPsl' not in tasks.get_available_permission_set_licenses()"
+              action: error
+              message: "You need DataPipelinesAddOnPsl licence to use this feature. Contact your Administrator."
+            - when: "'IndustriesServiceExcellencePsl' not in tasks.get_available_permission_set_licenses()"
+              action: error
+              message: "You need IndustriesServiceExcellencePsl licence to use this feature. Contact your Administrator."
+        steps:
+            1:
+                flow: fsc_actionable_segmentation_load_data
