@@ -156,6 +156,9 @@ plans:
             - when: "'IndustriesServiceExcellencePsl' not in tasks.get_available_permission_set_licenses()"
               action: error
               message: "You need IndustriesServiceExcellencePsl licence to use this feature. Contact your Administrator."
+            - when: "'ActionableListPsl' not in tasks.get_available_permission_set_licenses()"
+              action: error
+              message: "You need ActionableListPsl licence to use this feature. Contact your Administrator."
         steps:
             1:
                 flow: fsc_actionable_segmentation_install
@@ -178,6 +181,9 @@ plans:
             - when: "'IndustriesServiceExcellencePsl' not in tasks.get_available_permission_set_licenses()"
               action: error
               message: "You need IndustriesServiceExcellencePsl licence to use this feature. Contact your Administrator."
+            - when: "'ActionableListPsl' not in tasks.get_available_permission_set_licenses()"
+              action: error
+              message: "You need ActionableListPsl licence to use this feature. Contact your Administrator."
         steps:
             1:
                 flow: fsc_actionable_segmentation_load_data
