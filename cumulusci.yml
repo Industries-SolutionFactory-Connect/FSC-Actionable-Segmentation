@@ -90,16 +90,28 @@ flows:
     fsc_actionable_segmentation_install:
         steps:
             1:
+                task: assign_permission_sets
+                options:
+                    api_names: AnalyticsStoreUser,ActionableSegmentation,FSCAnalyticsAdmin,EinsteinAnalyticsPlusAdmin
+                ui_options:
+                    name: Adding required Permission Set to Admin User
+            2:
+                task: org_settings
+                options:
+                    definition_file: orgs/dev.json
+                ui_options:
+                    name: Enabling Org Settings
+            3:
                 task: install_crma_app
                 ui_options:
                     name: Install CRMA application to enable Actionable Segmentation
-            2:
+            4:
                 task: util_sleep
                 options:
                     seconds: 60
                 ui_options:
                     name: Wait until CRMA application is installed
-            3:
+            5:
                 task: deploy
                 options:
                     path: force-app/main/default/
